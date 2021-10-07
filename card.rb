@@ -2,11 +2,6 @@
 class Card
   attr_reader :value, :rank, :suit
 
-  VALUES_BY_RANKS = { '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9, '10' => 10,
-                      'J' => 10, 'Q' => 10, 'K' => 10, 'A' => 11 }.freeze
-
-  SUITS = ['+', '<3', '^', '<>'].freeze
-
   def initialize(rank, suit)
     @suit = suit
     @rank = rank
@@ -23,7 +18,22 @@ class Card
                  end
   end
 
+  def self.ranks
+    ranks = []
+    VALUES_BY_RANKS.each { |rank, _value| ranks << rank }
+    ranks
+  end
+
+  def self.suits
+    SUITS
+  end
+
   protected
+
+  VALUES_BY_RANKS = { '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9, '10' => 10,
+                      'J' => 10, 'Q' => 10, 'K' => 10, 'A' => 11 }.freeze
+
+  SUITS = ['+', '<3', '^', '<>'].freeze
 
   def validate!
     errors = []
