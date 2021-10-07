@@ -12,6 +12,18 @@ class GameManager
 
   def start_game
     loop do
+      loop do
+        players.each do |player|
+          case player.make_turn
+          when :skip
+            next
+          when :pull
+            player.take_card(deck)
+          when :open
+            break
+          end
+        end
+      end
       another_game?
     end
   end
