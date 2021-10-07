@@ -1,10 +1,14 @@
-# Runs the game and makes dealer's turns
+require_relative 'player'
+require_relative 'dealer'
+require_relative 'deck'
+
+# Runs the game
 class GameManager
   def initialize
-    deck = Deck.new
+    @deck = Deck.new
+    @players = []
+    @players << Player.new << Dealer.new
   end
 
-  def start_game
-    puts 'game started'
-  end
+  def start_game; end
 end
