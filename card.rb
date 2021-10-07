@@ -10,13 +10,12 @@ class Card
   end
 
   def draw
-    card = "[#{rank}"
-    card + case suit
-           when '+', '^'
-             " #{suit}]"
-           else
-             "#{suit}]"
-           end
+    "[#{rank}" + case suit
+                 when '+', '^'
+                   " #{suit}]"
+                 else
+                   "#{suit}]"
+                 end
   end
 
   protected
