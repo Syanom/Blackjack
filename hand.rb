@@ -41,6 +41,6 @@ class Hand
     cards.each do |card|
       result += "#{card.draw} "
     end
-    result += "                     #{cash}"
+    result += "                     cash: #{cash}"
   end
 end

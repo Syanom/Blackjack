@@ -4,9 +4,9 @@ require_relative 'hand'
 class DealerHand < Hand
   def draw
     result = ''
-    cards.each do |_card|
+    cards.each do
       result += '[***] '
     end
-    result += "                     #{cash}"
+    result += "                     cash: #{cash}"
   end
 end
