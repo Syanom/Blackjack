@@ -124,7 +124,12 @@ class GameManager
       cmd = player.make_turn
       case cmd
       when :pull
-        player.hand.take_cards(*deck.give_cards(1))
+        card = deck.give_cards(1)[0]
+        player.hand.take_cards(card)
+        if player.instance_of?(Player)
+          puts "You've pulled #{card.draw}"
+          gets
+        end
       when :open
         puts "line 129 cmd = #{cmd}"
         break
