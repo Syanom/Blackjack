@@ -113,7 +113,7 @@ class GameManager
   end
 
   def make_turns
-    cmd = :empty
+    cmds = Array.new(players.length, :no)
     players.each do |player|
       system('clear')
       if player.instance_of?(Player)
@@ -121,21 +121,24 @@ class GameManager
         gets
       end
       draw_table(player)
-      cmd = player.make_turn
-      case cmd
-      when :pull
-        card = deck.give_cards(1)[0]
-        player.hand.take_cards(card)
-        if player.instance_of?(Player)
-          puts "You've pulled #{card.draw}"
-          gets
-        end
-      when :open
-        puts "line 129 cmd = #{cmd}"
-        break
+      cmds[player.id - 1] = player.make_turn
+      break if open?(cmds)
+      next unless cmds[player.id - 1] == :pull
+
+      card = deck.give_cards(1)[0]
+      player.hand.take_cards(card)
+      if player.instance_of?(Player)
+        puts "You've pulled #{card.draw}"
+        gets
       end
     end
-    puts "line 133 cmd = #{cmd}"
-    return :open if cmd == :open || players_has_3_cards?
+    return :open if open?(cmds) || players_has_3_cards?
+  end
+
+  def open?(cmds)
+    cmds.each do |cmd|
+      return false if cmd != :open
+    end
+    true
   end
 end

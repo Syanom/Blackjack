@@ -5,9 +5,9 @@ class Dealer < Player
   def make_turn
     case hand.count_points
     when 1..17
-      hand.cards.length < 3 ? :pull : :skip
+      hand.cards.length < 3 ? :pull : :open
     else
-      :skip
+      :open
     end
   end
 end
