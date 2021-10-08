@@ -9,7 +9,7 @@ class GameManager
     @deck.shuffle
     @players = []
     # Add as many human players (Player.new) or computer players (Dealer.new) as you want
-    @players << Player.new << Dealer.new << Dealer.new << Dealer.new
+    @players << Player.new << Dealer.new << Player.new << Dealer.new
     @bank = 0.0
   end
 
@@ -17,7 +17,7 @@ class GameManager
     loop do
       make_bets
       loop do
-        make_turns
+        break if make_turns == :open
       end
       make_results
       cards = another_game?
@@ -116,15 +116,21 @@ class GameManager
     cmd = :empty
     players.each do |player|
       system('clear')
+      if player.instance_of?(Player)
+        puts "Player#{player.id}'s turn"
+        gets
+      end
       draw_table(player)
       cmd = player.make_turn
       case cmd
       when :pull
         player.hand.take_cards(*deck.give_cards(1))
       when :open
+        puts "line 129 cmd = #{cmd}"
         break
       end
     end
-    return if cmd == :open || players_has_3_cards?
+    puts "line 133 cmd = #{cmd}"
+    return :open if cmd == :open || players_has_3_cards?
   end
 end
