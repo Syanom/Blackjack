@@ -43,4 +43,12 @@ class Hand
     end
     result += "                     cash: #{cash}"
   end
+
+  def draw_hidden
+    result = ''
+    cards.each do
+      result += '[***] '
+    end
+    result += "                     cash: #{cash}"
+  end
 end

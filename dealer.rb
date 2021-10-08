@@ -1,13 +1,7 @@
-require_relative 'dealer_hand'
+require_relative 'player'
 
 # Represents Dealer in game
-class Dealer
-  attr_accessor :hand
-
-  def initialize
-    @hand = DealerHand.new
-  end
-
+class Dealer < Player
   def make_turn
     case hand.count_points
     when 1..17
