@@ -2,12 +2,10 @@ require_relative 'card'
 
 # Hands of our players
 class Hand
-  attr_accessor :cash
   attr_reader :cards
 
   def initialize
     @cards = []
-    @cash = 100
   end
 
   def count_points
@@ -41,7 +39,7 @@ class Hand
     cards.each do |card|
       result += "#{card.draw} "
     end
-    result += "                     cash: #{cash}"
+    result += "            points: #{count_points}"
   end
 
   def draw_hidden
@@ -49,6 +47,10 @@ class Hand
     cards.each do
       result += '[***] '
     end
-    result += "                     cash: #{cash}"
+    result += '                      '
+  end
+
+  def count_cards
+    cards.length
   end
 end

@@ -1,3 +1,7 @@
 require_relative 'game_manager'
 
-game_manager.new.start_game
+begin
+  GameManager.new.start_game
+rescue RuntimeError => e
+  puts e.message
+end
