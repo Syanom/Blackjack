@@ -9,18 +9,25 @@ class Hand
   end
 
   def count_points
-    ace = false
+    ace = 0
     points = 0
     cards.each do |card|
       if card.rank == 'A'
-        ace = true
+        ace += 1
         next
       end
       points += card.value
     end
-    return points if ace == false
+    return points if ace.zero?
 
-    points += points + 11 <= 21 ? 11 : 1
+    case ace
+    when 1
+      points += points + 11 <= 21 ? 11 : 1
+    when 2
+      points += points + 12 > 21 ? 2 : 12
+    when 3
+      points = 13
+    end
   end
 
   def drop_cards
