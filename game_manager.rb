@@ -9,7 +9,7 @@ class GameManager
     @deck.shuffle
     @players = []
     # Add as many human players (Player.new) or computer players (Dealer.new) as you want
-    @players << Player.new << Dealer.new << Player.new << Dealer.new
+    @players << Player.new << Dealer.new
     @bank = 0.0
   end
 
