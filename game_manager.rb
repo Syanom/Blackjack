@@ -4,8 +4,6 @@ require_relative 'deck'
 
 # Runs the game
 class GameManager
-  attr_accessor :players, :bank, :deck, :win_message
-
   def initialize
     @deck = Deck.new
     @deck.shuffle
@@ -31,6 +29,8 @@ class GameManager
   end
 
   protected
+
+  attr_accessor :players, :bank, :deck, :win_message
 
   def another_game?
     print 'Do you want another game? y/n: '

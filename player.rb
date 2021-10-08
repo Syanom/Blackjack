@@ -2,7 +2,7 @@ require_relative 'hand'
 
 # Represents Player in game
 class Player
-  attr_accessor :hand, :id, :cash, :instances
+  attr_accessor :hand, :id, :cash
 
   @@instances = 0
 
