@@ -44,17 +44,17 @@ class Hand
   def draw
     result = ''
     cards.each do |card|
-      result += "#{card.draw} "
+      result += card.draw.to_s.ljust(6)
     end
-    result += "            points: #{count_points}"
+    result.ljust(20) + "points: #{count_points}"
   end
 
   def draw_hidden
     result = ''
     cards.each do
-      result += '[***] '
+      result += '[***]'.ljust(6)
     end
-    result += '                      '
+    result.ljust(30)
   end
 
   def count_cards

@@ -2,22 +2,23 @@ require_relative 'hand'
 
 # Represents Player in game
 class Player
-  attr_accessor :hand, :id, :cash
+  attr_accessor :hand, :cash, :name, :wants_to_open
 
-  @@instances = 0
+  TURN_OPTIONS = %i[skip pull open].freeze
 
-  def initialize
+  def initialize(name)
     @hand = Hand.new
-    @@instances += 1
-    @id = @@instances
     @cash = 100.0
+    @wants_to_open = false
+    @name = name
   end
 
   def make_turn
+    return :open if wants_to_open
+
     puts 'Enter your turn: skip/pull/open'
     turn = gets.chomp.to_sym
-    raise 'Wrong turn' unless %i[skip pull open].include?(turn)
-    raise 'You have 3 cards already. You cant pull anymore' if turn == :pull && hand.cards.length >= 3
+    raise 'Wrong turn' unless TURN_OPTIONS.include?(turn)
 
     turn
   rescue RuntimeError => e
@@ -25,11 +26,13 @@ class Player
     retry
   end
 
-  def draw
-    hand.draw + "     cash: #{cash}USD"
+  def draw(winners = [], cash_won = 0)
+    result = "#{name}:".ljust(15) + hand.draw + " cash: #{cash}USD"
+    result += "(+#{cash_won}USD)" if winners.include?(self)
+    result
   end
 
   def draw_hidden
-    hand.draw_hidden + "     cash: #{cash}USD"
+    "#{name}:".ljust(15) + hand.draw_hidden + " cash: #{cash}USD"
   end
 end
