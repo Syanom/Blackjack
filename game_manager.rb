@@ -75,15 +75,15 @@ class GameManager
 
   def make_results
     winners = find_winners
-    self.bank /= winners.length
+    won_cash = (bank / winners.length).round(2)
     self.win_message = ''
     winners.each do |winner|
       win_message << "#{winner.name} "
-      winner.cash += self.bank
+      winner.cash += won_cash
     end
     system('clear')
     puts "#{win_message} have won!"
-    draw_table(nil, winners, self.bank)
+    draw_table(nil, winners, won_cash)
     self.bank = 0
   end
 
