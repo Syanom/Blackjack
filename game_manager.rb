@@ -77,13 +77,11 @@ class GameManager
     winners = find_winners
     won_cash = (bank / winners.length).round(2)
     self.win_message = ''
-    winners.each do |winner|
-      win_message << "#{winner.name} "
-      winner.cash += won_cash
-    end
+    winners.each { |winner| win_message << "#{winner.name} " }
     system('clear')
     puts "#{win_message} have won!"
     draw_table(nil, winners, won_cash)
+    winners.each { |winner| winner.cash += won_cash }
     self.bank = 0
   end
 
