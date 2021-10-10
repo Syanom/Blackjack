@@ -56,6 +56,7 @@ class GameManager
     cards = []
     players.each do |player|
       player.wants_to_open = false
+      player.did_skip = false
       cards.push(*player.hand.drop_cards)
     end
     cards
@@ -125,6 +126,7 @@ class GameManager
         end
         player.wants_to_open = true
       when :skip
+        player.did_skip = true
         next
       when :open
         player.wants_to_open = true

@@ -2,24 +2,26 @@ require_relative 'hand'
 
 # Represents Player in game
 class Player
-  attr_accessor :hand, :cash, :name, :wants_to_open
+  attr_accessor :hand, :cash, :name, :wants_to_open, :did_skip, :turn_options
 
-  TURN_OPTIONS = %i[skip pull open].freeze
   NAME_WIDTH = 13
 
   def initialize(name)
     @hand = Hand.new
     @cash = 100.0
     @wants_to_open = false
+    @did_skip = false
     @name = name
+    @turn_options = %i[skip pull open]
   end
 
   def make_turn
     return :open if wants_to_open
 
-    puts 'Enter your turn: skip/pull/open'
+    current_turn_options = did_skip ? turn_options - [:skip] : turn_options
+    puts "Enter your turn: #{current_turn_options.join('/')}"
     turn = gets.chomp.to_sym
-    raise 'Wrong turn' unless TURN_OPTIONS.include?(turn)
+    raise 'Wrong turn' unless current_turn_options.include?(turn)
 
     turn
   rescue RuntimeError => e
