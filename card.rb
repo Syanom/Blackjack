@@ -2,6 +2,8 @@
 class Card
   attr_reader :value, :rank, :suit
 
+  CARD_WIDTH = 6
+
   def initialize(rank, suit)
     @suit = suit
     @rank = rank
@@ -10,12 +12,13 @@ class Card
   end
 
   def draw
-    "[#{rank}" + case suit
-                 when '+', '^'
-                   " #{suit}]"
-                 else
-                   "#{suit}]"
-                 end
+    cards_look = "[#{rank}" + case suit
+                              when '+', '^'
+                                " #{suit}]"
+                              else
+                                "#{suit}]"
+                              end
+    cards_look.ljust(CARD_WIDTH)
   end
 
   def self.ranks

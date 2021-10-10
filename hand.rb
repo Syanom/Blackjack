@@ -2,10 +2,14 @@ require_relative 'card'
 
 # Hands of our players
 class Hand
-  attr_reader :cards
+  attr_reader :cards, :max_cards_amount, :hand_width
+
+  POINTS_WIDTH = 10
 
   def initialize
     @cards = []
+    @max_cards_amount = 3
+    @hand_width = Card::CARD_WIDTH * @max_cards_amount + POINTS_WIDTH
   end
 
   def count_points
@@ -44,17 +48,18 @@ class Hand
   def draw
     result = ''
     cards.each do |card|
-      result += card.draw.to_s.ljust(6)
+      result += card.draw
     end
-    result.ljust(20) + "points: #{count_points}"
+    result += "points: #{count_points}"
+    result.ljust(hand_width)
   end
 
   def draw_hidden
     result = ''
     cards.each do
-      result += '[***]'.ljust(6)
+      result += '[***]'.ljust(Card::CARD_WIDTH)
     end
-    result.ljust(30)
+    result.ljust(hand_width)
   end
 
   def count_cards
