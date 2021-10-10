@@ -5,6 +5,7 @@ class Player
   attr_accessor :hand, :cash, :name, :wants_to_open
 
   TURN_OPTIONS = %i[skip pull open].freeze
+  NAME_WIDTH = 13
 
   def initialize(name)
     @hand = Hand.new
@@ -27,12 +28,12 @@ class Player
   end
 
   def draw(winners = [], cash_won = 0)
-    result = "#{name}:".ljust(15) + hand.draw + " cash: #{cash}USD"
+    result = "#{name}:".ljust(NAME_WIDTH) + hand.draw + " cash: #{cash}USD"
     result += "(+#{cash_won}USD)" if winners.include?(self)
     result
   end
 
   def draw_hidden
-    "#{name}:".ljust(15) + hand.draw_hidden + " cash: #{cash}USD"
+    "#{name}:".ljust(NAME_WIDTH) + hand.draw_hidden + " cash: #{cash}USD"
   end
 end

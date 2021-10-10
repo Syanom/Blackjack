@@ -50,7 +50,7 @@ class Hand
     cards.each do |card|
       result += card.draw
     end
-    result += "points: #{count_points}"
+    result = result.ljust(max_cards_amount * Card::CARD_WIDTH) + "points: #{count_points}"
     result.ljust(hand_width)
   end
 
