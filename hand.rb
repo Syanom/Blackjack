@@ -4,7 +4,7 @@ require_relative 'card'
 class Hand
   attr_reader :cards, :max_cards_amount, :hand_width
 
-  POINTS_WIDTH = 10
+  POINTS_WIDTH = 15
 
   def initialize
     @cards = []
@@ -50,7 +50,7 @@ class Hand
     cards.each do |card|
       result += card.draw
     end
-    result = result.ljust(max_cards_amount * Card::CARD_WIDTH) + "points: #{count_points}"
+    result = result.ljust(max_cards_amount * Card::CARD_WIDTH) + "points: #{count_points}".rjust(POINTS_WIDTH)
     result.ljust(hand_width)
   end
 

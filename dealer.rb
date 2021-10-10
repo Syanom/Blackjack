@@ -14,7 +14,7 @@ class Dealer < Player
 
     case hand.count_points
     when 1..17
-      hand.cards.length < Hand.max_cards_amount ? :pull : :open
+      hand.cards.length < hand.max_cards_amount ? :pull : :open
     else
       :open
     end
