@@ -75,6 +75,7 @@ class GameManager
 
   def make_results
     winners = find_winners
+    winners = players if winners.empty?
     won_cash = (bank / winners.length).round(2)
     self.win_message = ''
     winners.each { |winner| win_message << "#{winner.name} " }
